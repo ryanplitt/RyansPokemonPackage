@@ -4,7 +4,7 @@ public struct Pokemon: Decodable {
     let name: String
     fileprivate let photo: URL
     var abilities: [String] = []
-    var type: [String] = []
+    var types: [String] = []
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -81,18 +81,16 @@ public struct Pokemon: Decodable {
         var pType = try values.nestedUnkeyedContainer(forKey: .types)
         while !pType.isAtEnd {
             let type = try pType.decode(PokemonType.self)
-            self.type.append(type.name)
+            self.types.append(type.name)
         }
     }
 }
-
-
-@available(iOS 15.0, *)
 
 public enum PokemonGen {
     case original, all
 }
 
+@available(iOS 15.0, *)
 public func getRandomPokemon(gen: PokemonGen = .original) async -> Pokemon {
     let randomNumber = Int.random(in: gen == .original ? 1...150 : 1...905)
     let url = URL(string: "https://pokeapi.co/api/v2/pokemon/\(String(randomNumber))/")!
