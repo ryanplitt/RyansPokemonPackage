@@ -1,10 +1,10 @@
 import Foundation
 
 public struct Pokemon: Decodable {
-    let name: String
+    public let name: String
     fileprivate let photo: URL
-    var abilities: [String] = []
-    var types: [String] = []
+    public var abilities: [String] = []
+    public var types: [String] = []
     
     enum CodingKeys: String, CodingKey {
         case name
