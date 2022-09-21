@@ -82,8 +82,8 @@ public func getRandomPokemon(gen: PokemonGen = .original) async -> Pokemon {
 import UIKit
 import Kingfisher
 
-extension UIImageView {
-    func setPokemon(pokemon: Pokemon) {
+public extension UIImageView {
+    public func setPokemon(pokemon: Pokemon) {
         self.kf.setImage(with: pokemon.photo)
     }
 }
