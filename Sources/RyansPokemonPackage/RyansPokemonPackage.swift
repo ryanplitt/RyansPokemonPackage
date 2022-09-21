@@ -69,7 +69,7 @@ public enum PokemonGen {
 }
 
 public func getRandomPokemon(gen: PokemonGen = .original) async -> Pokemon {
-    let randomNumber = Int.random(in: 1..<150)
+    let randomNumber = Int.random(in: gen == .original ? 1...150 : 1...905)
     let url = URL(string: "https://pokeapi.co/api/v2/pokemon/\(String(randomNumber))/")!
     let urlSession = URLSession.shared
     let (data, _) = try! await urlSession.data(from: url)
