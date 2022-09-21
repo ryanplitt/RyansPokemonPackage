@@ -40,7 +40,7 @@ public struct Pokemon: Decodable {
             case name
         }
         
-        init(from decoder: Decoder) throws {
+        public init(from decoder: Decoder) throws {
             let values = try decoder.container(keyedBy: CodingKeys.self)
             let ability = try values.nestedContainer(keyedBy: AbilityCodingKeys.self, forKey: .ability)
             self.name = try ability.decode(String.self, forKey: .name)
@@ -57,7 +57,7 @@ public struct Pokemon: Decodable {
             case name
         }
         
-        init(from decoder: Decoder) throws {
+        public init(from decoder: Decoder) throws {
             let values = try decoder.container(keyedBy: CodingKeys.self)
             let pType = try values.nestedContainer(keyedBy: TypeCodingKeys.self, forKey: .type)
             self.name = try pType.decode(String.self, forKey: .name)
