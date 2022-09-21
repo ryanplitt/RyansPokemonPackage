@@ -63,6 +63,7 @@ public struct Pokemon: Decodable {
 
 
 @available(macOS 12.0, *)
+@available(iOS 15.0, *)
 public func getRandomPokemon() async -> Pokemon {
     let randomNumber = Int.random(in: 1..<150)
     let url = URL(string: "https://pokeapi.co/api/v2/pokemon/\(String(randomNumber))/")!
