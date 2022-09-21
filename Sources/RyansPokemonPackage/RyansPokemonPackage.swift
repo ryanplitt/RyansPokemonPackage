@@ -2,7 +2,7 @@ import Foundation
 
 public struct Pokemon: Decodable {
     let name: String
-    let photo: String
+    fileprivate let photo: URL
     var abilities: [String] = []
     
     enum CodingKeys: String, CodingKey {
@@ -51,7 +51,7 @@ public struct Pokemon: Decodable {
         let sprites = try values.nestedContainer(keyedBy: CodingKeysSprites.self, forKey: .sprites)
         let other = try sprites.nestedContainer(keyedBy: OtherKeysSprites.self, forKey: .other)
         let front = try other.nestedContainer(keyedBy: FrontKeysSprites.self, forKey: .official)
-        self.photo = try front.decode(String.self, forKey: .front)
+        self.photo = try front.decode(URL.self, forKey: .front)
         
         var abilities = try values.nestedUnkeyedContainer(forKey: .abilities)
         while !abilities.isAtEnd {
@@ -62,7 +62,6 @@ public struct Pokemon: Decodable {
 }
 
 
-@available(macOS 12.0, *)
 @available(iOS 15.0, *)
 public func getRandomPokemon() async -> Pokemon {
     let randomNumber = Int.random(in: 1..<150)
@@ -72,3 +71,16 @@ public func getRandomPokemon() async -> Pokemon {
     let pokemon = try! JSONDecoder().decode(Pokemon.self, from: data)
     return pokemon
 }
+
+#if canImport(UIKit)
+
+import UIKit
+import Kingfisher
+
+extension UIImageView {
+    func setPokemon(pokemon: Pokemon) {
+        self.kf.setImage(with: pokemon.photo)
+    }
+}
+
+#endif
