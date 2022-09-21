@@ -29,8 +29,8 @@ public struct Pokemon: Decodable {
         case ability
     }
     
-    struct Ability: Decodable {
-        let name: String
+    public struct Ability: Decodable {
+        public let name: String
         
         enum CodingKeys: String, CodingKey {
             case ability
@@ -47,8 +47,8 @@ public struct Pokemon: Decodable {
         }
     }
     
-    struct PokemonType: Decodable {
-        let name: String
+    public struct PokemonType: Decodable {
+        public let name: String
         enum CodingKeys: String, CodingKey {
             case type
         }
